@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-pt" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Gestão | Centralab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .bg-centralab-navy { background-color: #1e3a8a; } 
+        .text-centralab-navy { color: #1e3a8a; }
+        .bg-centralab-red { background-color: #e31e24; } 
+        .text-centralab-red { color: #e31e24; }
+        .bg-centralab-light { background-color: #93c5fd; }
+        
+        /* Custom Scrollbar for table */
+        .custom-scrollbar::-webkit-scrollbar { height: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="fixed w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 border-b border-slate-100">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="w-10 h-10 bg-centralab-navy rounded-lg flex items-center justify-center text-white font-bold text-xl mr-3 shadow-md">C</div>
+                <span class="text-xl font-bold text-centralab-navy tracking-tighter">CENTRALAB ADMIN</span>
+            </div>
+            
+            <div class="flex space-x-4 items-center">
+                <button onclick="carregarDados()" class="text-slate-500 hover:text-centralab-navy transition flex items-center gap-2 text-sm font-semibold bg-slate-100 px-4 py-2 rounded-full">
+                    <i class="fas fa-sync-alt" id="refreshIcon"></i> Atualizar Dados
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Dashboard Content -->
+    <main class="flex-grow pt-28 pb-12">
+        <div class="container mx-auto px-6">
+            
+            <!-- Título da Página -->
+            <div class="mb-8 flex flex-col md:flex-row md:justify-between md:items-end gap-4">
+                <div>
+                    <h1 class="text-3xl font-extrabold text-centralab-navy">Gestão de Inscrições</h1>
+                    <p class="text-slate-500 mt-1">Acompanhe os registos do Workshop de Cardiopneumologia.</p>
+                </div>
+                <!-- Search Input -->
+                <div class="relative w-full md:w-72">
+                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="searchInput" placeholder="Pesquisar nome ou telefone..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-centralab-navy shadow-sm text-sm">
+                </div>
+            </div>
+
+            <!-- Dashboard KPIs (Cards Resumo) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10" id="kpiCards">
+                <!-- Total -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center">
+                    <div class="w-14 h-14 rounded-full bg-blue-50 text-centralab-navy flex items-center justify-center text-2xl mr-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Inscritos</p>
+                        <h3 class="text-3xl font-extrabold text-slate-800" id="kpiTotal">-</h3>
+                    </div>
+                </div>
+
+                <!-- Pagos -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center">
+                    <div class="w-14 h-14 rounded-full bg-green-50 text-green-600 flex items-center justify-center text-2xl mr-4">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Pagamentos Feitos</p>
+                        <h3 class="text-3xl font-extrabold text-slate-800" id="kpiPagos">-</h3>
+                    </div>
+                </div>
+
+                <!-- Pendentes -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center">
+                    <div class="w-14 h-14 rounded-full bg-red-50 text-centralab-red flex items-center justify-center text-2xl mr-4">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Pendentes</p>
+                        <h3 class="text-3xl font-extrabold text-slate-800" id="kpiPendentes">-</h3>
+                    </div>
+                </div>
+
+                <!-- Presenças -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center">
+                    <div class="w-14 h-14 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-2xl mr-4">
+                        <i class="fas fa-id-badge"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Presenças Confirmadas</p>
+                        <h3 class="text-3xl font-extrabold text-slate-800" id="kpiPresencas">-</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela de Dados -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden relative">
+                
+                <!-- Loading State -->
+                <div id="loadingState" class="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center">
+                    <i class="fas fa-circle-notch animate-spin text-4xl text-centralab-red mb-4"></i>
+                    <p class="font-semibold text-slate-600 animate-pulse">A carregar dados da base de dados...</p>
+                </div>
+
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-left border-collapse whitespace-nowrap">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-[11px] uppercase tracking-wider font-bold text-slate-400">
+                                <th class="py-4 px-6">ID</th>
+                                <th class="py-4 px-6">Nome Completo</th>
+                                <th class="py-4 px-6">Telefone</th>
+                                <th class="py-4 px-6">Área de Formação</th>
+                                <th class="py-4 px-6 text-center">Estado do Pagamento</th>
+                                <th class="py-4 px-6 text-center">Presença</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaCorpo" class="text-sm divide-y divide-slate-100">
+                            <!-- Os dados serão injetados aqui via JS -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Empty State (Escondido por padrão) -->
+                <div id="emptyState" class="hidden py-16 text-center">
+                    <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-300">
+                        <i class="fas fa-folder-open text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-700">Nenhuma inscrição encontrada</h3>
+                    <p class="text-slate-500 mt-1">Os dados submetidos no formulário aparecerão aqui.</p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-white border-t border-slate-200 text-center mt-auto">
+        <p class="text-slate-400 text-xs tracking-widest uppercase font-semibold">Centralab - Painel Administrativo © 2024</p>
+    </footer>
+
+    <!-- SCRIPT DE LÓGICA DO DASHBOARD -->
+    <script>
+        const API_URL = 'https://sheetdb.io/api/v1/zl3zhehxlj089';
+        let dadosGlobais = [];
+
+        const tabelaCorpo = document.getElementById('tabelaCorpo');
+        const loadingState = document.getElementById('loadingState');
+        const emptyState = document.getElementById('emptyState');
+        const searchInput = document.getElementById('searchInput');
+        const refreshIcon = document.getElementById('refreshIcon');
+
+        // Função para carregar dados da API
+        async function carregarDados() {
+            try {
+                // UI de carregamento
+                loadingState.classList.remove('hidden');
+                tabelaCorpo.innerHTML = '';
+                emptyState.classList.add('hidden');
+                refreshIcon.classList.add('animate-spin');
+
+                const response = await fetch(API_URL);
+                
+                if (!response.ok) throw new Error('Erro ao buscar dados');
+                
+                const data = await response.json();
+                dadosGlobais = data; // Guardar em variável global para a pesquisa
+
+                atualizarKPIs(data);
+                renderizarTabela(data);
+
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Não foi possível carregar os dados. Verifique a ligação à internet.');
+            } finally {
+                loadingState.classList.add('hidden');
+                refreshIcon.classList.remove('animate-spin');
+            }
+        }
+
+        // Função para calcular e mostrar os números nos cartões do topo
+        function atualizarKPIs(dados) {
+            const total = dados.length;
+            
+            // Filtra ignorando maiúsculas/minúsculas e espaços.
+            // NOTA: Requer que existam as colunas 'pagamento' e 'presenca' no Excel
+            const pagos = dados.filter(item => 
+                item.pagamento && item.pagamento.trim().toLowerCase() === 'pago'
+            ).length;
+            
+            const presencas = dados.filter(item => 
+                item.presenca && item.presenca.trim().toLowerCase() === 'confirmada'
+            ).length;
+
+            const pendentes = total - pagos;
+
+            // Animação de números simples
+            document.getElementById('kpiTotal').innerText = total;
+            document.getElementById('kpiPagos').innerText = pagos;
+            document.getElementById('kpiPendentes').innerText = pendentes;
+            document.getElementById('kpiPresencas').innerText = presencas;
+        }
+
+        // Função para criar o HTML da tabela
+        function renderizarTabela(dados) {
+            tabelaCorpo.innerHTML = '';
+
+            if (dados.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            dados.forEach((inscrito, index) => {
+                // Tratar dados vazios caso as colunas ainda não existam
+                const nome = inscrito.nomecompleto || '-';
+                const telefone = inscrito.telefone || '-';
+                const area = inscrito.areadeformacao || '-';
+                
+                // Tratar Estado de Pagamento
+                const statusPagamento = (inscrito.pagamento || '').trim().toLowerCase();
+                let badgePagamento = `<span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full"><i class="fas fa-clock mr-1"></i> Pendente</span>`;
+                
+                if (statusPagamento === 'pago') {
+                    badgePagamento = `<span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full"><i class="fas fa-check mr-1"></i> Pago</span>`;
+                }
+
+                // Tratar Presença
+                const statusPresenca = (inscrito.presenca || '').trim().toLowerCase();
+                let badgePresenca = `<span class="text-slate-400 text-xs font-semibold"><i class="fas fa-minus"></i></span>`;
+                
+                if (statusPresenca === 'confirmada') {
+                    badgePresenca = `<span class="px-3 py-1 bg-blue-100 text-centralab-navy text-xs font-bold rounded-full">Confirmada</span>`;
+                }
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 transition";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 text-slate-400 font-mono text-xs">#${(index + 1).toString().padStart(3, '0')}</td>
+                    <td class="py-4 px-6 font-semibold text-slate-800">${nome}</td>
+                    <td class="py-4 px-6 text-slate-600"><i class="fab fa-whatsapp text-green-500 mr-2"></i>${telefone}</td>
+                    <td class="py-4 px-6 text-slate-600">${area}</td>
+                    <td class="py-4 px-6 text-center">${badgePagamento}</td>
+                    <td class="py-4 px-6 text-center">${badgePresenca}</td>
+                `;
+                
+                tabelaCorpo.appendChild(tr);
+            });
+        }
+
+        // Lógica de pesquisa em tempo real
+        searchInput.addEventListener('input', (e) => {
+            const termo = e.target.value.toLowerCase();
+            const dadosFiltrados = dadosGlobais.filter(item => {
+                const nomeMatch = (item.nomecompleto || '').toLowerCase().includes(termo);
+                const telMatch = (item.telefone || '').includes(termo);
+                return nomeMatch || telMatch;
+            });
+            renderizarTabela(dadosFiltrados);
+        });
+
+        // Carregar dados assim que a página abre
+        document.addEventListener('DOMContentLoaded', carregarDados);
+
+    </script>
+
+
+
+<!-- SCRIPT DE LÓGICA DO DASHBOARD COM ATUALIZAÇÃO (PATCH) -->
+    <script>
+        const API_URL = 'https://sheetdb.io/api/v1/zl3zhehxlj089';
+        let dadosGlobais = [];
+
+        const tabelaCorpo = document.getElementById('tabelaCorpo');
+        const loadingState = document.getElementById('loadingState');
+        const emptyState = document.getElementById('emptyState');
+        const searchInput = document.getElementById('searchInput');
+        const refreshIcon = document.getElementById('refreshIcon');
+
+        // 1. CARREGAR DADOS DA API
+        async function carregarDados() {
+            try {
+                loadingState.classList.remove('hidden');
+                tabelaCorpo.innerHTML = '';
+                emptyState.classList.add('hidden');
+                refreshIcon.classList.add('animate-spin');
+
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error('Erro ao buscar dados');
+                
+                const data = await response.json();
+                dadosGlobais = data;
+
+                atualizarKPIs(data);
+                renderizarTabela(data);
+
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Não foi possível carregar os dados.');
+            } finally {
+                loadingState.classList.add('hidden');
+                refreshIcon.classList.remove('animate-spin');
+            }
+        }
+
+        // 2. ATUALIZAR NÚMEROS DO TOPO
+        function atualizarKPIs(dados) {
+            const total = dados.length;
+            const pagos = dados.filter(item => item.pagamento && item.pagamento.trim().toLowerCase() === 'pago').length;
+            const presencas = dados.filter(item => item.presenca && item.presenca.trim().toLowerCase() === 'confirmada').length;
+            const pendentes = total - pagos;
+
+            document.getElementById('kpiTotal').innerText = total;
+            document.getElementById('kpiPagos').innerText = pagos;
+            document.getElementById('kpiPendentes').innerText = pendentes;
+            document.getElementById('kpiPresencas').innerText = presencas;
+        }
+
+        // 3. RENDERIZAR TABELA COM BOTÕES CLICÁVEIS
+        function renderizarTabela(dados) {
+            tabelaCorpo.innerHTML = '';
+
+            if (dados.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            dados.forEach((inscrito, index) => {
+                const nome = inscrito.nomecompleto || '-';
+                const telefone = inscrito.telefone || '-';
+                const area = inscrito.areadeformacao || '-';
+                
+                // Lógica do Botão de Pagamento (Alterna entre Pendente e Pago)
+                const isPago = (inscrito.pagamento || '').trim().toLowerCase() === 'pago';
+                const novoStatusPago = isPago ? 'Pendente' : 'Pago';
+                const btnPagamento = isPago 
+                    ? `<button onclick="atualizarStatus('${telefone}', 'pagamento', '${novoStatusPago}')" class="px-3 py-1 bg-green-100 hover:bg-green-200 text-green-700 text-xs font-bold rounded-full transition shadow-sm cursor-pointer"><i class="fas fa-check mr-1"></i> Pago</button>`
+                    : `<button onclick="atualizarStatus('${telefone}', 'pagamento', '${novoStatusPago}')" class="px-3 py-1 bg-yellow-100 hover:bg-yellow-200 text-yellow-700 text-xs font-bold rounded-full transition shadow-sm cursor-pointer"><i class="fas fa-clock mr-1"></i> Marcar Pago</button>`;
+
+                // Lógica do Botão de Presença (Alterna entre Vazio e Confirmada)
+                const isConfirmada = (inscrito.presenca || '').trim().toLowerCase() === 'confirmada';
+                const novoStatusPresenca = isConfirmada ? '' : 'Confirmada';
+                const btnPresenca = isConfirmada
+                    ? `<button onclick="atualizarStatus('${telefone}', 'presenca', '${novoStatusPresenca}')" class="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-centralab-navy text-xs font-bold rounded-full transition shadow-sm cursor-pointer"><i class="fas fa-user-check mr-1"></i> Confirmada</button>`
+                    : `<button onclick="atualizarStatus('${telefone}', 'presenca', '${novoStatusPresenca}')" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-500 text-xs font-bold rounded-full transition shadow-sm cursor-pointer">Validar Presença</button>`;
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 transition";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 text-slate-400 font-mono text-xs">#${(index + 1).toString().padStart(3, '0')}</td>
+                    <td class="py-4 px-6 font-semibold text-slate-800">${nome}</td>
+                    <td class="py-4 px-6 text-slate-600"><i class="fab fa-whatsapp text-green-500 mr-2"></i>${telefone}</td>
+                    <td class="py-4 px-6 text-slate-600">${area}</td>
+                    <td class="py-4 px-6 text-center">${btnPagamento}</td>
+                    <td class="py-4 px-6 text-center">${btnPresenca}</td>
+                `;
+                tabelaCorpo.appendChild(tr);
+            });
+        }
+
+        // 4. FUNÇÃO PARA ATUALIZAR DADOS DIRETAMENTE NO SHEETDB
+        async function atualizarStatus(telefoneId, coluna, novoValor) {
+            // Confirmar ação para evitar cliques acidentais
+            if(!confirm(`Tem a certeza que deseja alterar o status para "${novoValor || 'Pendente/Vazio'}"?`)) return;
+
+            // Ativar tela de carregamento para bloquear cliques duplos
+            loadingState.classList.remove('hidden');
+
+            try {
+                // A API do SheetDB permite atualizar (PATCH) usando uma coluna específica.
+                // Neste caso usamos a coluna 'telefone' para encontrar a linha certa no Excel.
+                // Usamos encodeURIComponent caso o telefone tenha espaços ou sinais de +.
+                const urlAtualizacao = `${API_URL}/telefone/${encodeURIComponent(telefoneId)}`;
+                
+                const corpoDaRequisicao = {};
+                corpoDaRequisicao[coluna] = novoValor;
+
+                const response = await fetch(urlAtualizacao, {
+                    method: 'PATCH',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(corpoDaRequisicao)
+                });
+
+                if (!response.ok) throw new Error('Falha ao atualizar na base de dados');
+
+                // Recarrega os dados para atualizar a tabela visualmente
+                await carregarDados();
+
+            } catch (error) {
+                console.error(error);
+                alert("Erro ao atualizar o estado. Verifique a ligação ou se a coluna existe na planilha.");
+                loadingState.classList.add('hidden');
+            }
+        }
+
+        // Pesquisa
+        searchInput.addEventListener('input', (e) => {
+            const termo = e.target.value.toLowerCase();
+            const dadosFiltrados = dadosGlobais.filter(item => {
+                const nomeMatch = (item.nomecompleto || '').toLowerCase().includes(termo);
+                const telMatch = (item.telefone || '').includes(termo);
+                return nomeMatch || telMatch;
+            });
+            renderizarTabela(dadosFiltrados);
+        });
+
+        // Inicia a página carregando os dados
+        document.addEventListener('DOMContentLoaded', carregarDados);
+
+    </script>
+
+    
+</body>
+</html>
