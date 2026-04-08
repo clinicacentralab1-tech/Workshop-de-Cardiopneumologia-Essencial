@@ -17,13 +17,12 @@
         .hero-gradient { background: linear-gradient(135deg, #ffffff 0%, #dbeafe 100%); }
     </style>
 </head>
-<body class="bg-white text-slate-800">
+<body class="bg-white text-slate-800 relative">
 
     <!-- Header -->
     <header class="fixed w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center">
-                <!-- LOGO CENTRALAB -->
                 <img src="logo.jpeg" alt="Centralab Logo" class="h-12 w-auto">
                 <span class="ml-2 text-xl font-bold text-centralab-navy hidden sm:block tracking-tighter">ENTRALAB</span>
             </div>
@@ -43,7 +42,7 @@
             <div class="space-y-8">
                 <div class="inline-flex items-center space-x-2 px-3 py-1 bg-white border border-blue-100 rounded-full shadow-sm">
                     <span class="w-2 h-2 bg-centralab-red rounded-full animate-pulse"></span>
-                    <span class="text-xs font-bold text-centralab-navy uppercase tracking-wider">Workshop de Cardiopneumologia Essencial | BENGUELA</span>
+                    <span class="text-xs font-bold text-centralab-navy uppercase tracking-wider">Workshop de Cardiopneumologia Essencial</span>
                 </div>
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-centralab-navy leading-[1.1]">
                     Domine a Cardiopneumologia <span class="text-centralab-red">Na Prática da Saúde Ocupacional</span>
@@ -57,12 +56,14 @@
                 </div>
             </div>
             
-            <!-- Imagem da Técnica -->
             <div class="relative flex justify-center">
                 <div class="relative z-10 w-full max-w-md">
                     <img src="claudia3.png" alt="Especialista Centralab" class="w-full h-auto drop-shadow-2xl">
-                </div>
-                <!-- Círculo decorativo -->
+                </div><div class="inline-block bg-centralab-red text-white px-3 py-1 rounded text-xs font-bold uppercase">Formadora: <p></p>
+                 <p>Cláudia de Carvalho</p> <p></p>Técn.Cardiopneumologia </div>
+
+                    
+
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border-[40px] border-blue-50/50 rounded-full -z-0"></div>
             </div>
         </div>
@@ -77,7 +78,6 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- ECG -->
                 <div class="p-8 bg-slate-50 rounded-2xl border-b-4 border-centralab-red text-center group transition hover:shadow-lg">
                     <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-centralab-red shadow-sm group-hover:bg-centralab-red group-hover:text-white transition">
                         <i class="fas fa-heartbeat text-3xl"></i>
@@ -85,7 +85,6 @@
                     <h3 class="font-bold text-xl mb-2 text-centralab-navy">ECG</h3>
                     <p class="text-sm text-slate-600">Rigor técnico na execução e reconhecimento de padrões de normalidade.</p>
                 </div>
-                <!-- MAPA -->
                 <div class="p-8 bg-slate-50 rounded-2xl border-b-4 border-centralab-navy text-center group transition hover:shadow-lg">
                     <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-centralab-navy shadow-sm group-hover:bg-centralab-navy group-hover:text-white transition">
                         <i class="fas fa-tachometer-alt text-3xl"></i>
@@ -93,7 +92,6 @@
                     <h3 class="font-bold text-xl mb-2 text-centralab-navy">MAPA 24h</h3>
                     <p class="text-sm text-slate-600">Instalação e monitorização da pressão arterial no contexto da saúde ocupacional.</p>
                 </div>
-                <!-- HOLTER -->
                 <div class="p-8 bg-slate-50 rounded-2xl border-b-4 border-centralab-red text-center group transition hover:shadow-lg">
                     <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-centralab-red shadow-sm group-hover:bg-centralab-red group-hover:text-white transition">
                         <i class="fas fa-microchip text-3xl"></i>
@@ -138,13 +136,16 @@
                 </div>
                 
                 <div class="md:w-1/2 bg-centralab-navy p-10 rounded-[3rem] text-white">
-                    <h3 class="text-2xl font-bold mb-4 text-centralab-light italic">Impacto Real</h3>
+                    <h3 class="text-2xl font-bold mb-4 text-centralab-light">O que torna este workshop relevante para si?</h3>
                     <p class="opacity-90 mb-8">
-                        A CENTRALAB, na vanguarda da saúde ocupacional em Angola, foca na formação de profissionais preparados para os desafios reais do terreno.
+                        <p>✔ Conteúdo direcionado para a prática em saúde ocupacional.</p>
+                        <p>✔ Abordagem prática, objetiva e sem complexidade desnecessária</p>
+                        <p>✔ Aplicação imediata no seu contexto de trabalho </p>
+                        <p>✔ Atualização de competências com impacto real no desempenho profissional.</p>
                     </p>
                     <div class="bg-white/10 p-6 rounded-2xl border border-white/20">
                         <span class="text-xs uppercase font-bold text-centralab-light tracking-widest">Exclusivo para:</span>
-                        <p class="text-lg font-semibold mt-2">Enfermeiros do Trabalho & Técnicos de Saúde</p>
+                        <p class="text-lg font-semibold mt-2">Enfermeiros do Trabalho & Técnicos de saúde ocupacional e Profissionais com experiência na área.</p>
                     </div>
                 </div>
             </div>
@@ -156,11 +157,14 @@
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12 bg-slate-50 p-8 rounded-3xl border border-slate-100">
                 <div class="w-56 h-72 rounded-2xl overflow-hidden shadow-xl flex-shrink-0">
-                    <img src="claudia3.png" alt="Instrutora Centralab" class="w-full h-full object-cover object-top bg-centralab-light">
+                    <img src="draaida2.png" alt="Instrutora Centralab" class="w-full h-full object-cover object-top bg-centralab-light">
                 </div>
                 <div class="space-y-4">
-                    <div class="inline-block bg-centralab-red text-white px-3 py-1 rounded text-xs font-bold uppercase">Formadora | Cláudia de Carvalho | Técn.Cardiopneumologia </div>
-                    <h2 class="text-3xl font-bold text-centralab-navy">Destaque-se na sua área profissional</h2>
+
+                     <h2 class="text-3xl font-bold text-centralab-navy">UMA INICIATIVA DE:</h2>
+
+                    <div class="inline-block bg-centralab-red text-white px-3 py-1 rounded text-xs font-bold uppercase">DRA.AIDA DE MENEZES | DIRECTORA CLÍNICA | ESPECIALISTA EM MED. DO TRABALHO </div>
+                    
                     <p class="text-slate-600 leading-relaxed">
                         Num mercado cada vez mais exigente, profissionais diferenciados são aqueles que dominam competências práticas essenciais.
 A CENTRALAB, na vanguarda da saúde ocupacional em Angola, aposta na formação de profissionais preparados para os desafios reais do terreno.
@@ -188,7 +192,7 @@ A CENTRALAB, na vanguarda da saúde ocupacional em Angola, aposta na formação 
                 </div>
                 
                 <div class="md:w-3/5 p-12">
-                    <form id="registrationForm" class="space-y-5">
+                    <form id="registrationForm" class="space-y-5" novalidate>
                         <div id="formFields">
                             <!-- NOME -->
                             <div class="space-y-1">
@@ -230,7 +234,7 @@ A CENTRALAB, na vanguarda da saúde ocupacional em Angola, aposta na formação 
                         <div id="successMessage" class="hidden text-center py-10">
                             <i class="fas fa-check-circle text-6xl text-green-500 mb-4"></i>
                             <h3 class="text-2xl font-bold text-centralab-navy">Inscrição Enviada!</h3>
-                            <p class="text-slate-500 mt-2">Entraremos em contacto muito brevemente.</p>
+                            <p class="text-slate-500 mt-2">Os dados de pagamento foram disponibilizados no ecrã.</p>
                         </div>
                     </form>
                 </div>
@@ -241,31 +245,113 @@ A CENTRALAB, na vanguarda da saúde ocupacional em Angola, aposta na formação 
     <!-- Footer -->
     <footer class="py-10 bg-white border-t border-slate-100 text-center">
         <img src="logo-centralab.png" alt="Centralab" class="h-10 mx-auto mb-4 opacity-50 grayscale">
-        <p class="text-slate-400 text-xs tracking-widest uppercase">Centralab - Saúde Ocupacional Angola © 2024</p>
+        <p class="text-slate-400 text-xs tracking-widest uppercase">Centralab - Saúde Ocupacional Angola © 2026 |SITE CRIADO POR:ENG.JACINTO NEVES CATUMBO</p>
     </footer>
 
-    <!-- SCRIPT ATUALIZADO PARA INTEGRAÇÃO SHEETDB -->
+    <!-- MODAL DE SUCESSO E PAGAMENTO (INICIALMENTE ESCONDIDO) -->
+    <div id="modalPagamento" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4 opacity-100 transition-opacity">
+        <div class="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl relative">
+            
+            <!-- Botão Fechar no Topo -->
+            <button onclick="fecharModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 transition">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            
+            <div class="p-8 text-center mt-2">
+                <!-- Ícone Check Principal -->
+                <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+                    <i class="fas fa-check text-3xl"></i>
+                </div>
+                
+                <h3 class="text-2xl font-extrabold text-centralab-navy mb-1">O seu cadastro foi efectuado com sucesso!</h3>
+                <p class="text-slate-500 text-sm mb-6 pb-6 border-b border-slate-100">Para garantir a sua vaga, realize o pagamento com os dados abaixo e enviar para:<span class="text-sm font-semibold text-slate-500">Whatsapp:934567834</span>  ou email <span class="text-sm font-semibold text-slate-500">facturacao@centralab.co.ao</span>
+                
+
+
+                
+                <!-- Dados Bancários em Caixa de Destaque -->
+                <div class="bg-slate-50 rounded-2xl p-5 text-left border border-slate-200 mb-6 shadow-inner">
+                    <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                        <i class="fas fa-university text-centralab-navy"></i> Dados Bancários
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center bg-white p-3 rounded-lg border border-slate-100">
+                            <span class="text-sm font-semibold text-slate-500">IBAN</span>
+                            <span class="font-mono font-bold text-centralab-navy tracking-tight text-sm">AO06773929220</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white p-3 rounded-lg border border-slate-100">
+                            <span class="text-sm font-semibold text-slate-500">Nº de Conta</span>
+                            <span class="font-mono font-bold text-centralab-navy tracking-tight text-sm">424523523</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QR Code e Call to Action -->
+                <div class="bg-blue-50/50 rounded-2xl p-4 mb-6 border border-blue-100">
+                    <img src="wgqrcode.jpeg" alt="QR Code Grupo WhatsApp" class="w-32 h-32 mx-auto rounded-xl object-cover shadow-md mb-3 border-2 border-white">
+                    <p class="text-xs text-slate-600 font-semibold leading-relaxed px-2">
+                        Faça o scan do código QR e adira ao grupo para estar por dentro de todas as novidades até ao dia do workshop.
+                    </p>
+                </div>
+                
+                <!-- Botão Fechar Principal -->
+                <button onclick="fecharModal()" class="w-full bg-centralab-navy text-white font-bold py-4 rounded-xl hover:bg-blue-900 transition shadow-lg">
+                    Entendi, Fechar janela
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT ATUALIZADO COM INTEGRAÇÃO E VALIDAÇÕES -->
     <script>
         const form = document.getElementById('registrationForm');
         const formFields = document.getElementById('formFields');
         const successMessage = document.getElementById('successMessage');
         const submitBtn = document.getElementById('submitBtn');
+        const modalPagamento = document.getElementById('modalPagamento'); // Referência ao Modal
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
+            const formData = new FormData(form);
+            
+            // Variáveis dos campos
+            const nome = formData.get('nome').trim();
+            const emailRaw = formData.get('email').trim();
+            const telefoneRaw = formData.get('telefone').trim();
+            const area = formData.get('area');
+
+            // 1. Validação de Campos Vazios
+            if(!nome || !emailRaw || !telefoneRaw || !area) {
+                alert("Por favor, preencha todos os campos obrigatórios.");
+                return;
+            }
+
+            // 2. Validação de Email (Regex padrão)
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailRaw)) {
+                alert("Por favor, introduza um endereço de e-mail válido (ex: seu.nome@email.com).");
+                return;
+            }
+
+            // 3. Validação de Número de Telefone
+            const telefoneLimpo = telefoneRaw.replace(/[\s\-()]/g, '');
+            const phoneRegex = /^\+?[0-9]{9,15}$/;
+            if (!phoneRegex.test(telefoneLimpo)) {
+                alert("Por favor, introduza um número de telefone válido (ex: 9XX XXX XXX).");
+                return;
+            }
+
             // Feedback Visual de Carregamento
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-circle-notch animate-spin mr-2"></i> Enviando...';
 
-            const formData = new FormData(form);
-            
-            // Mapeamento Exato Solicitado (JSON Key -> HTML Name/Value)
+            // Mapeamento Exato Solicitado para o SheetDB
             const data = {
-                nomecompleto: formData.get('nome'),
-                telefone: formData.get('telefone'),
-                email: formData.get('email'),
-                areadeformacao: formData.get('area')
+                nomecompleto: nome,
+                telefone: telefoneRaw,
+                email: emailRaw,
+                areadeformacao: area
             };
 
             const DBSHEET_URL = 'https://sheetdb.io/api/v1/zl3zhehxlj089'; 
@@ -284,19 +370,27 @@ A CENTRALAB, na vanguarda da saúde ocupacional em Angola, aposta na formação 
                     throw new Error('Falha na comunicação com a API.');
                 }
 
-                // Ocultar formulário e mostrar mensagem de sucesso
+                // SUCESSO: Ocultar formulário, mostrar mensagem e ABRIR O MODAL
                 formFields.classList.add('hidden');
                 successMessage.classList.remove('hidden');
+                
+                // Abre o Modal de Sucesso/Pagamento
+                modalPagamento.classList.remove('hidden');
 
             } catch (err) {
                 console.error(err);
-                alert("Erro ao enviar os dados. Verifique a sua ligação à internet.");
+                alert("Erro ao enviar os dados. Verifique a sua ligação à internet e tente novamente.");
                 
                 // Restaura o botão em caso de erro
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<span>Solicitar Inscrição Agora</span><i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>';
             }
         });
+
+        // Função para Fechar o Modal manualmente
+        function fecharModal() {
+            modalPagamento.classList.add('hidden');
+        }
     </script>
 </body>
 </html>
